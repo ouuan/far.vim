@@ -66,7 +66,7 @@ def search(ctx, args, cmdargs):
     elif glob_mode == 'rg':
         # Use ripgrep to glob
         logger.debug(f'Globbing with ripgrep: rg --files {rg_rules_glob(rules)} {rg_ignore_globs(ignore_files)}')
-        files = os.popen(f'rg --files {rg_rules_glob(rules)} {rg_ignore_globs(ignore_files)}').read().split('\n')
+        files = os.popen(f'rg --iglob !.git --hidden --files {rg_rules_glob(rules)} {rg_ignore_globs(ignore_files)}').read().split('\n')
         if len(files) and files[-1] == '':
             files.pop()
         if len(files) == 0:
